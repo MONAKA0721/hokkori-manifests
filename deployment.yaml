@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hokkori
+  namespace: hokkori
+  labels:
+    app: hokkori
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hokkori
+  template:
+    metadata:
+      labels:
+        app: hokkori
+    spec:
+      containers:
+        - name: hokkori
+          image: kix.ocir.io/nro0opflyunj/hokkori/hokkori:a344226
+          command: ["./bin/hokkori"]
+          ports:
+            - containerPort: 8080
+      imagePullSecrets:
+        - name: ocirsecret
